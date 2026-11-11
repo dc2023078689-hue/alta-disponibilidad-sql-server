@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Proyecto de la Unidad II de Sistemas Operativos I: alta disponibilidad en Microsoft SQL Server mediante Always On Availability Groups.">
+  <title>SQLHA | Alta disponibilidad en Microsoft SQL Server</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <div class="shell top-inner">
+      <a href="#inicio" class="brand"><span class="brand-mark">S</span><span>SQL<span class="accent">HA</span><small>PROYECTO UNIDAD II</small></span></a>
+      <nav aria-label="Navegacion principal">
+        <a href="#problema">Problema</a><a href="#arquitectura">Arquitectura</a><a href="#seguridad">Seguridad</a><a href="#documentos">Documentos</a><a href="#equipo">Equipo</a>
+      </nav>
+    </div>
+  </header>
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="shell hero-grid">
+        <div>
+          <span class="eyebrow">UNIVERSIDAD PRIVADA DE TACNA &nbsp; | &nbsp; SISTEMAS OPERATIVOS I</span>
+          <h1>Una base de datos que <em>no depende de un solo servidor.</em></h1>
+          <p>Dise&ntilde;o de una arquitectura de alta disponibilidad en Microsoft SQL Server 2022 mediante Always On Availability Groups y Windows Server Failover Clustering.</p>
+          <div class="actions"><a class="btn primary" href="#arquitectura">Explorar arquitectura</a><a class="btn secondary" href="#documentos">Descargar entregables</a></div>
+          <p class="statusline"><span class="dot"></span> Dise&ntilde;o documentado y verificaci&oacute;n est&aacute;tica ejecutada. Pruebas reales de SQL Server pendientes de Unidad III.</p>
+        </div>
+        <div class="hero-panel">
+          <div class="panel-head">ARQUITECTURA OBJETIVO <span>2026-II</span></div>
+          <div class="mini-node client">CLIENTE / APLICACI&Oacute;N</div>
+          <div class="flowline"></div>
+          <div class="mini-node listener">LISTENER SQL</div>
+          <div class="flowline"></div>
+          <div class="nodes"><div class="mini-node">SQL-SRV01 <small>R&eacute;plica primaria inicial</small></div><div class="sync">&#8596;<small>SINCRONIZACI&Oacute;N</small></div><div class="mini-node">SQL-SRV02 <small>R&eacute;plica secundaria</small></div></div>
+          <div class="panel-foot">WSFC &bull; Qu&oacute;rum &bull; Testigo SMB &bull; DNS</div>
+        </div>
+      </div>
+    </section>
+    <section class="metrics shell" aria-label="Indicadores de diseno">
+      <div><strong>2</strong><span>r&eacute;plicas SQL Server</span></div><div><strong>120 s</strong><span>RTO objetivo del laboratorio</span></div><div><strong>RPO 0</strong><span>en failover sincronizado v&aacute;lido</span></div><div><strong>4</strong><span>diagramas de ingenier&iacute;a</span></div>
+    </section>
+    <section class="section shell" id="problema"><div class="section-label">01 / CONTEXTO</div><h2>Continuidad de operaciones frente a una falla individual</h2><div class="two"><p>Una instancia SQL Server aislada constituye un punto &uacute;nico de fallo. Su indisponibilidad puede interrumpir pedidos, consultas y operaciones transaccionales. El caso estudiado es <strong>acad&eacute;mico y simulado</strong>; no representa datos obtenidos en una empresa real.</p><p>El dise&ntilde;o usa dos instancias independientes, un grupo de disponibilidad, un Listener y un cl&uacute;ster Windows. Se diferencian las metas de disponibilidad de los resultados que todav&iacute;a no se han medido.</p></div></section>
+    <section class="section alt" id="arquitectura"><div class="shell"><div class="section-label">02 / DISE&Ntilde;O</div><h2>Arquitectura e infraestructura</h2><p class="lede">Selecciona una vista. Las figuras describen el dise&ntilde;o propuesto, no capturas de un sistema ya implementado.</p><div class="tabs" role="tablist" aria-label="Diagramas"><button class="tab active" data-figure="arquitectura" role="tab" aria-selected="true">Arquitectura</button><button class="tab" data-figure="despliegue" role="tab" aria-selected="false">Despliegue</button><button class="tab" data-figure="red" role="tab" aria-selected="false">Topolog&iacute;a de red</button><button class="tab" data-figure="seguridad" role="tab" aria-selected="false">Seguridad</button></div><figure class="diagram"><img id="figure-image" src="assets/arquitectura.png" alt="Diagrama de arquitectura logica Always On"><figcaption id="figure-caption">Figura 1. Arquitectura l&oacute;gica con Listener, r&eacute;plicas, WSFC y testigo de qu&oacute;rum.</figcaption></figure></div></section>
+    <section class="section shell" id="seguridad"><div class="section-label">03 / PROTECCI&Oacute;N</div><h2>Disponibilidad no significa ausencia de riesgo</h2><div class="cards"><article class="card"><span>01</span><h3>Acceso m&iacute;nimo</h3><p>Roles diferenciados, cuentas dedicadas y filtrado de tr&aacute;fico por origen, destino y servicio.</p></article><article class="card"><span>02</span><h3>Respaldo independiente</h3><p>Copias fuera del almacenamiento exclusivo de las r&eacute;plicas y pruebas de restauraci&oacute;n.</p></article><article class="card"><span>03</span><h3>Supervisi&oacute;n</h3><p>DMV, eventos de WSFC y registros de SQL Server con identificaci&oacute;n de incidentes.</p></article></div><p class="disclaimer">El laboratorio virtual tiene un anfitri&oacute;n f&iacute;sico com&uacute;n. No permite afirmar tolerancia ante la p&eacute;rdida del equipo anfitri&oacute;n.</p></section>
+    <section class="section alt" id="documentos"><div class="shell"><div class="section-label">04 / ENTREGABLES</div><h2>Documentaci&oacute;n descargable</h2><div class="downloads"><a download href="documentos/Informe_Unidad_II_SQLHA.docx"><span class="filetype">DOCX</span><span><b>Informe acad&eacute;mico</b><small>Word editable &middot; 14 cap&iacute;tulos</small></span><span class="arrow">&#8599;</span></a><a download href="documentos/Informe_Unidad_II_SQLHA.pdf"><span class="filetype">PDF</span><span><b>Informe para lectura</b><small>Versi&oacute;n PDF con diagramas y referencias</small></span><span class="arrow">&#8599;</span></a><a download href="documentos/Presentacion_SQLHA.pptx"><span class="filetype">PPTX</span><span><b>Presentaci&oacute;n</b><small>12 diapositivas editables</small></span><span class="arrow">&#8599;</span></a><a download href="documentos/Presentacion_SQLHA.pdf"><span class="filetype">PDF</span><span><b>Diapositivas en PDF</b><small>Versi&oacute;n para lectura</small></span><span class="arrow">&#8599;</span></a><a download href="documentos/Validacion_Diseno.zip"><span class="filetype">ZIP</span><span><b>Material reproducible</b><small>Comprobador IP, modelo l&oacute;gico y scripts SQL</small></span><span class="arrow">&#8599;</span></a></div><p class="disclaimer"><strong>Investigacion de la Unidad I:</strong> consulta el <a href="investigacion_unidad_I/index.html">catalogo de los 42 PDF recibidos y enlaces de consulta</a>. Los archivos PDF originales se conservan en un respaldo privado y no se redistribuyen desde GitHub Pages.</p><p class="disclaimer">Este paquete contiene rutas locales funcionales. Para obtener una URL p&uacute;blica se debe subir el repositorio a GitHub y habilitar GitHub Pages. El enlace a Drive/OneDrive a&uacute;n debe proporcionarlo el equipo.</p></div></section>
+    <section class="section shell" id="equipo"><div class="section-label">05 / AUTORES</div><h2>Equipo del proyecto</h2><div class="team"><div>Enzo Joaquin Eyzaguirre Medina <small>2019063334</small></div><div>Eva Milen Contreras Vargas <small>2024079630</small></div><div>Vania Yesenia Estela Orellana <small>2024079967</small></div><div>Milagros del Rosario Mendoza Valdivia <small>2024080125</small></div><div>Nayeli Daniela Quispe Cancapa <small>2024079970</small></div><div>Diego Anthony Concori Calizaya <small>2023078689</small></div></div></section>
+  </main><footer><div class="shell"><span>SQLHA &middot; Universidad Privada de Tacna</span><span>Proyecto acad&eacute;mico &middot; Tacna, Per&uacute; &middot; 2026-II</span></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
